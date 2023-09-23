@@ -18,7 +18,7 @@ const HomeScreen = () => {
         <Text style={styles.headerText}>Booking.com</Text>
       </View>
       <View style={styles.content}>
-        <Text>Home</Text>
+        <Text>Rest of the content goes here</Text>
       </View>
     </View>
   );

@@ -1,50 +1,81 @@
-import { StyleSheet } from 'react-native'
-import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Icon from 'react-native-vector-icons/Ionicons'
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useIsFocused } from '@react-navigation/native';
+import { AntDesign, Entypo, Ionicons } from 'react-native-vector-icons';
 import HomeScreen from './screens/HomeScreen';
 import SavedScreen from './screens/SavedScreen';
 import BookingsScreen from './screens/BookingsScreen';
 import ProfileScreen from './screens/ProfileScreen';
 
 const StackNavigator = () => {
-  const Tab = createBottomTabNavigator()
-  const Stack = createNativeStackNavigator()
+  const Tab = createBottomTabNavigator();
+  const Stack = createNativeStackNavigator();
 
   function BottomTabs() {
+    const isFocused = useIsFocused(); // Use useIsFocused to determine if a tab is focused
+
     return (
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ color, size, focused }) => {
-            let iconName;
-
-            if (route.name === 'Home') {
-              iconName = 'home';
-            } else if (route.name === 'Saved') {
-              iconName = 'heart';
-            } else if (route.name === 'Bookings') {
-              iconName = 'notifications';
-            } else if (route.name === 'Profile') {
-              iconName = 'person';
-            }
-
-            // Set the color to blue for focused icons
-            const iconColor = focused ? '#007AFF' : color;
-
-            return <Icon name={iconName} color={iconColor} size={size} />;
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: '#007AFF', // Default active tab color
-        }}
-      >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Saved" component={SavedScreen} />
-        <Tab.Screen name="Bookings" component={BookingsScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarLabel: 'Home',
+            headerShown: false,
+            tabBarIcon: ({ focused }) => {
+              return focused ? (
+                <Ionicons name="ios-home" color="#007AFF" size={24} />
+              ) : (
+                <Ionicons name="ios-home-outline" color="gray" size={24} />
+              );
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Saved"
+          component={SavedScreen}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ focused }) => {
+              return focused ? (
+                <Ionicons name="ios-heart" color="#007AFF" size={24} />
+              ) : (
+                <Ionicons name="ios-heart-outline" color="gray" size={24} />
+              );
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Bookings"
+          component={BookingsScreen}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ focused }) => {
+              return focused ? (
+                <Ionicons name="notifications" color="#007AFF" size={24} />
+              ) : (
+                <Ionicons name="notifications-outline" color="gray" size={24} />
+              );
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ focused }) => {
+              return focused ? (
+                <Ionicons name="ios-person" color="#007AFF" size={24} />
+              ) : (
+                <Ionicons name="ios-person-outline" color="gray" size={24} />
+              );
+            },
+          }}
+        />
       </Tab.Navigator>
-    )
+    );
   }
 
   return (
@@ -55,9 +86,7 @@ const StackNavigator = () => {
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
-export default StackNavigator
-
-const styles = StyleSheet.create({})
+export default StackNavigator;
