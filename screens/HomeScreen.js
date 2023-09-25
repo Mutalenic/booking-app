@@ -1,25 +1,36 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useLayoutEffect } from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { StyleSheet, Text, View } from 'react-native';
+import React, { useLayoutEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from 'react-native-vector-icons';
+import Header from '../components/Header';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerShown: false,
+      headerShown: true,
       title: "Booking.com",
+      headerTitleAlign: 'center', // Center-align the header title
+      headerTitleStyle: {
+        color: 'white', // Change the text color to white
+        fontSize: 24, // Adjust font size if needed
+        fontWeight: 'bold', // Add fontWeight if needed
+      },
+      headerStyle: {
+        backgroundColor: '#007AFF', // Blue background color
+      },
+      headerRight: () => (
+        <View style={styles.notificationIcon}>
+          <Ionicons name="notifications" color="white" size={24} />
+        </View>
+      ),
     });
   }, [navigation]);
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Booking.com</Text>
-      </View>
-      <View style={styles.content}>
-        <Text>Rest of the content goes here</Text>
-      </View>
+      <Header/>
     </View>
   );
 };
@@ -29,21 +40,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  header: {
-    height: 110,
-    backgroundColor: '#007AFF', // Blue background color
-    justifyContent: 'center', // Vertically center the text
-    alignItems: 'center', // Horizontally center the text
-  },
   headerText: {
-    color: 'white', // White text color
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
   },
-  content: {
-    flex: 1, // Take remaining vertical space
-    justifyContent: 'center', // Center content vertically
-    alignItems: 'center', // Center content horizontally
+  notificationIcon: {
+    marginRight: 16, // Adjust the margin if needed
+    borderRadius: 50, // Make it round
+    padding: 8, // Add some padding for space
   },
 });
 
