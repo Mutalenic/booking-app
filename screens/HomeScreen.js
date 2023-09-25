@@ -16,9 +16,13 @@ const HomeScreen = () => {
         color: 'white', // Change the text color to white
         fontSize: 24, // Adjust font size if needed
         fontWeight: 'bold', // Add fontWeight if needed
-      },
+        borderBottomWidth: 0, // Make the bottom border invisible
+     },
       headerStyle: {
         backgroundColor: '#007AFF', // Blue background color
+        borderBottomColor: 'transparent', // Set bottom border color to transparent
+        shadowColor: 'transparent', // Set shadow color to transparent
+
       },
       headerRight: () => (
         <View style={styles.notificationIcon}>
